@@ -1,4 +1,4 @@
-package com.doubleo.entranceservice.enums;
+package com.doubleo.entranceservice.domain.enums;
 
 public enum VisitCategory {
     PATIENT,

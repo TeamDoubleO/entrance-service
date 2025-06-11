@@ -1,3 +1,3 @@
-package com.doubleo.entranceservice.dto.response;
+package com.doubleo.entranceservice.domain.dto.response;
 
 public record EnterVerificationInfoResponse(boolean success, String message) {}

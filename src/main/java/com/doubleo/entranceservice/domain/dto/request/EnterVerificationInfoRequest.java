@@ -1,7 +1,7 @@
-package com.doubleo.entranceservice.dto.request;
+package com.doubleo.entranceservice.domain.dto.request;
 
-import com.doubleo.entranceservice.enums.DeviceLocationType;
-import com.doubleo.entranceservice.enums.Direction;
+import com.doubleo.entranceservice.domain.enums.DeviceLocationType;
+import com.doubleo.entranceservice.domain.enums.Direction;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -16,4 +16,5 @@ public record EnterVerificationInfoRequest(
         LocalDateTime expiredAt,
         DeviceLocationType deviceLocationType,
         Direction direction,
-        String deviceAreaCode) {}
+        String deviceAreaCode,
+        Long deviceAreaId) {}

@@ -1,7 +1,7 @@
-package com.doubleo.entranceservice.client;
+package com.doubleo.entranceservice.grpc.client;
 
-import com.doubleo.entranceservice.enums.Direction;
-import com.doubleo.entranceservice.enums.VisitCategory;
+import com.doubleo.entranceservice.domain.enums.Direction;
+import com.doubleo.entranceservice.domain.enums.VisitCategory;
 import com.doubleo.entranceservice.global.exception.GrpcExceptionUtil;
 import com.doubleo.logservice.grpc.server.*;
 import io.grpc.StatusRuntimeException;

@@ -16,6 +16,9 @@ spring:
     include:
       - swagger
       - actuator
+      - grpc
+      - swagger
+      - redis
 
 logging:
   level:

@@ -23,14 +23,23 @@ repositories {
     mavenCentral()
 
     // 추가: GitHub Packages 에서 grpc-interfaces 모듈(hospital-interface)만 가져오기
-//    maven {
-//        name = 'GitHubPackages'
-//        url  = uri('https://maven.pkg.github.com/TeamDoubleO/grpc-interfaces')
-//        credentials {
-//            username = System.getenv("GIT_USERNAME") ?: project.findProperty("gpr.user")
-//            password = System.getenv("GIT_TOKEN") ?: project.findProperty("gpr.key")
-//        }
-//    }
+    maven {
+        name = 'GitHubPackages'
+        url  = uri('https://maven.pkg.github.com/TeamDoubleO/grpc-interfaces')
+        credentials {
+            username = System.getenv("GIT_USERNAME") ?: project.findProperty("gpr.user")
+            password = System.getenv("GIT_TOKEN") ?: project.findProperty("gpr.key")
+        }
+    }
+
+    maven {
+        name = 'GitHubPackages'
+        url  = uri('https://maven.pkg.github.com/TeamDoubleO/tenant-context')
+        credentials {
+            username = System.getenv("GIT_USERNAME") ?: project.findProperty("gpr.user")
+            password = System.getenv("GIT_TOKEN") ?: project.findProperty("gpr.key")
+        }
+    }
 }
 
 
@@ -40,45 +49,40 @@ ext {
 
 dependencies {
 
-//    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     // config
     implementation 'org.springframework.cloud:spring-cloud-starter-config'
     implementation 'org.springframework.cloud:spring-cloud-starter-bus-amqp'
-    // eureka
-//    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
-    // openfeign
-    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+
     // Swagger
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.0'
-    // MySQL
-//    implementation 'mysql:mysql-connector-java:8.0.33'
+
     // Actuator & Micrometer
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'io.micrometer:micrometer-core'
     implementation 'io.micrometer:micrometer-registry-prometheus'
 
-    compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
-
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-//    testImplementation 'com.h2database:h2'
+    testImplementation 'com.h2database:h2'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    implementation("org.modelmapper:modelmapper:3.1.1")
 
-    // hospital-interface 모듈
-//    implementation "com.doubleo.grpc:hospital-interface:0.2.0"
-//
-//    // gRPC 런타임
-//    implementation "io.grpc:grpc-netty:1.63.0"
-//    implementation "io.grpc:grpc-protobuf:1.63.0"
-//    implementation "io.grpc:grpc-stub:1.63.0"
-//
-//    // Spring Boot starter for gRPC 서버/클라이언트 자동설정
-//    implementation 'com.google.protobuf:protobuf-java:4.28.2'
-//    implementation 'net.devh:grpc-spring-boot-starter:3.1.0.RELEASE'
-//
-//    // Tenant-Context
-//    implementation 'com.doubleo:tenant-context:0.0.2'
+    // (1) grpc-interface 모듈
+    implementation "com.doubleo.grpc:log-interface:0.2.7"
+
+    // (2) gRPC 런타임
+    implementation "io.grpc:grpc-netty:1.63.0"
+    implementation "io.grpc:grpc-protobuf:1.63.0"
+    implementation "io.grpc:grpc-stub:1.63.0"
+
+    // (3) Spring Boot starter for gRPC 서버/클라이언트 자동설정
+    implementation 'com.google.protobuf:protobuf-java:3.24.4'
+    implementation 'net.devh:grpc-spring-boot-starter:3.1.0.RELEASE'
+
+    // Tenant-Context
+    implementation 'com.doubleo:tenant-context:0.0.2'
 
 }
 

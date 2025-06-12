@@ -1,8 +1,8 @@
-package com.doubleo.entranceservice.controller;
+package com.doubleo.entranceservice.domain.controller;
 
-import com.doubleo.entranceservice.dto.request.EnterVerificationInfoRequest;
-import com.doubleo.entranceservice.dto.response.EnterVerificationInfoResponse;
-import com.doubleo.entranceservice.service.EntranceService;
+import com.doubleo.entranceservice.domain.dto.request.EnterVerificationInfoRequest;
+import com.doubleo.entranceservice.domain.dto.response.EnterVerificationInfoResponse;
+import com.doubleo.entranceservice.domain.service.EntranceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

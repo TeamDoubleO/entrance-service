@@ -6,7 +6,6 @@ import com.doubleo.entranceservice.domain.enums.DeviceLocationType;
 import com.doubleo.entranceservice.domain.enums.VisitCategory;
 import com.doubleo.entranceservice.global.exception.CommonException;
 import com.doubleo.entranceservice.global.exception.errorcode.EntranceErrorCode;
-import com.doubleo.entranceservice.global.util.TenantValidator;
 import com.doubleo.entranceservice.grpc.client.LogClient;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -24,7 +23,8 @@ public class EntranceServiceImpl implements EntranceService {
     private final LogClient logClient;
 
     @Override
-    public EnterVerificationInfoResponse verifyEntrance(String tenantId, EnterVerificationInfoRequest request) {
+    public EnterVerificationInfoResponse verifyEntrance(
+            String tenantId, EnterVerificationInfoRequest request) {
 
         if (request.deviceLocationType() == DeviceLocationType.BUILDING
                 && request.direction() == null) {

@@ -19,6 +19,7 @@ configurations {
         extendsFrom annotationProcessor
     }
 }
+
 repositories {
     mavenCentral()
 
@@ -31,7 +32,6 @@ repositories {
             password = System.getenv("GIT_TOKEN") ?: project.findProperty("gpr.key")
         }
     }
-
     maven {
         name = 'GitHubPackages'
         url  = uri('https://maven.pkg.github.com/TeamDoubleO/tenant-context')
@@ -42,23 +42,25 @@ repositories {
     }
 }
 
-
 ext {
     set('springCloudVersion', "2024.0.1")
 }
 
 dependencies {
-
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    // config
+    //config
     implementation 'org.springframework.cloud:spring-cloud-starter-config'
     implementation 'org.springframework.cloud:spring-cloud-starter-bus-amqp'
 
-    // Swagger
+    //Swagger
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.0'
 
-    // Actuator & Micrometer
+    compileOnly 'org.projectlombok:lombok'
+    //mysql
+    implementation 'mysql:mysql-connector-java:8.0.33'
+
+    //actuator
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'io.micrometer:micrometer-core'
     implementation 'io.micrometer:micrometer-registry-prometheus'
@@ -69,7 +71,7 @@ dependencies {
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     implementation("org.modelmapper:modelmapper:3.1.1")
 
-    // (1) grpc-interface 모듈
+    // (1) hospital-interface 모듈
     implementation "com.doubleo.grpc:log-interface:0.2.7"
 
     // (2) gRPC 런타임
@@ -84,8 +86,12 @@ dependencies {
     // Tenant-Context
     implementation 'com.doubleo:tenant-context:0.0.2'
 
-}
+    // redis
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 
+    // firebase
+    implementation 'com.google.firebase:firebase-admin:9.4.3'
+}
 
 dependencyManagement {
     imports {
@@ -126,11 +132,11 @@ tasks.register('updateGitHooks', Copy) {
     into './.git/hooks'
 }
 
-//
-//tasks.register('makeGitHooksExecutable', Exec) {
-//    commandLine 'chmod', '+x', './.git/hooks/pre-commit', './.git/hooks/prepare-commit-msg'
-//    dependsOn updateGitHooks
-//}
-//
-//compileJava.dependsOn makeGitHooksExecutable
-//
+
+tasks.register('makeGitHooksExecutable', Exec) {
+    commandLine 'chmod', '+x', './.git/hooks/pre-commit', './.git/hooks/prepare-commit-msg'
+    dependsOn updateGitHooks
+}
+
+compileJava.dependsOn makeGitHooksExecutable
+

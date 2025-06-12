@@ -4,5 +4,5 @@ import com.doubleo.entranceservice.domain.dto.request.EnterVerificationInfoReque
 import com.doubleo.entranceservice.domain.dto.response.EnterVerificationInfoResponse;
 
 public interface EntranceService {
-    EnterVerificationInfoResponse verifyEntrance(EnterVerificationInfoRequest request);
+    EnterVerificationInfoResponse verifyEntrance(String tenantId, EnterVerificationInfoRequest request);
 }

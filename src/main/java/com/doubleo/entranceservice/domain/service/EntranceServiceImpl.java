@@ -22,12 +22,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class EntranceServiceImpl implements EntranceService {
 
     private final LogClient logClient;
-    private final TenantValidator tenantValidator;
 
     @Override
-    public EnterVerificationInfoResponse verifyEntrance(EnterVerificationInfoRequest request) {
-
-        String tenantId = tenantValidator.getTenantId();
+    public EnterVerificationInfoResponse verifyEntrance(String tenantId, EnterVerificationInfoRequest request) {
 
         if (request.deviceLocationType() == DeviceLocationType.BUILDING
                 && request.direction() == null) {

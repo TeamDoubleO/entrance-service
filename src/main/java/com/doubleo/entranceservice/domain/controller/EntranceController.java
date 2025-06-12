@@ -14,7 +14,8 @@ public class EntranceController {
 
     @PostMapping("/verify")
     public EnterVerificationInfoResponse entranceVerify(
+            @RequestHeader("X-Tenant-Id") String tenantId,
             @RequestBody EnterVerificationInfoRequest request) {
-        return entranceService.verifyEntrance(request);
+        return entranceService.verifyEntrance(tenantId, request);
     }
 }

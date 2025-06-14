@@ -26,6 +26,8 @@ public class EntranceServiceImpl implements EntranceService {
     public EnterVerificationInfoResponse verifyEntrance(
             String tenantId, EnterVerificationInfoRequest request) {
 
+        log.debug("Enter verification info for tenant {}", tenantId);
+
         if (request.deviceLocationType() == DeviceLocationType.BUILDING
                 && request.direction() == null) {
             throw new CommonException(EntranceErrorCode.MISSING_DIRECTION_WHEN_BUILDING);
